@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <form action="#" th:action="@{/englishWord/add}" method="post" th:object="${engWord}">
+        <table>
+            <tr>
+                <th>English Word</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" th:field="${engWord.word}"/>
+                </td>
+                <td th:class="${#fields.hasErrors('word')}" th:errors="*{word}"></td>
+            </tr>
+
+            <tr>
+                <th>Pronunciation</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" th:field="${engWord.pronunciation}"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Translation</th>
+            </tr>
+            <tr>
+
+                <td>
+                    <input type="text" th:field="${engWord.translation}"/>
+                </td>
+                <td th:class="${#fields.hasErrors('translation')}" th:errors="*{translation}"></td>
+            </tr>
+
+        </table>
+        <input type="submit" value="Add">
+    </form>
+</div>
+<br><br>
+<div align="center">
+
+            <table border="1">
+                <tr>
+                    <th>Your Words</th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>English Word</th>
+                    <th>Pronaciation</th>
+                    <th>Translation</th>
+
+                </tr>
+
+                <tr th:each="engWord : ${listOfEnglishWords}">
+                    <td th:text="${engWord.id}"></td>
+                    <td th:text="${engWord.word}"></td>
+                    <td th:text="${engWord.pronunciation}"></td>
+                    <td th:text="${engWord.translation}"></td>
+                    <td> <a th:href="@{'/englishWord/delete/' + ${engWord.id}}">Delete</a> </td>
+                    <td> <a id="link" th:href="@{'/englishWord/edit/' + ${engWord.id}}">Edit</a> </td>
+                </tr>
+
+            </table>
+</div>
+
+</body>
+</html>
