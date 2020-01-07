@@ -2,31 +2,48 @@ package app.controller;
 
 import app.entity.User;
 import app.repository.UserRepository;
+import app.service.SecurityService;
+import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
-    @GetMapping("/register")
-    public String register(Model model) {
-        User user = new User();
-        model.addAttribute(user);
-        return "register";
+
+    @Autowired
+    SecurityService securityService;
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
+        return "registration";
     }
 
-    @PostMapping("/register")
-    @ResponseBody
-    public String register (@ModelAttribute User user) {
-        userRepository.save(user);
-        return "Success";
+    @PostMapping("/registration")
+    public String register (@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        userService.save(userForm);
+        return "redirect:/user/login";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "loginPage";
+    }
+
+    @GetMapping({"/welcome", "/"})
+    public String welcome() {
+        return "hello";
     }
 }

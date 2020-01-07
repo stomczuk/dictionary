@@ -6,6 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .logout_buttom {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -70,6 +77,11 @@
 
             </table>
 </div>
+
+<br><br><br><br>
+<form th:action="@{/appLogout}" method="POST">
+    <input class="logout_buttom" type="submit" value="Logout"/>
+</form>
 
 </body>
 </html>

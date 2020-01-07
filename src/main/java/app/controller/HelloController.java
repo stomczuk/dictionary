@@ -29,7 +29,7 @@ public class HelloController {
 
     Logger logger = Logger.getGlobal();
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     public String hello() {
 
         return "hello";
