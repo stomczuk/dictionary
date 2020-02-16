@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlInlineBinaryData;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "eng_words")
@@ -24,6 +26,9 @@ public class EnglishWord {
 //    @NotNull
     private String translation;
 
+    @ManyToMany(mappedBy = "englishWords")
+    private Set<User> users = new HashSet<>();
+
     public EnglishWord() {
     }
 
@@ -36,6 +41,8 @@ public class EnglishWord {
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getWord() {
         return word;
@@ -59,5 +66,13 @@ public class EnglishWord {
 
     public void setTranslation(String translation) {
         this.translation = translation;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

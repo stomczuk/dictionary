@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <form action="#" th:action="@{/englishWord/edit}" method="post" th:object="${englishWord}">
+    <form action="#" th:action="@{'/englishWord/edit/' + ${englishWord.id}}" method="post" th:object="${englishWord}">
         <table>
             <tr>
                 <th>English Word</th>

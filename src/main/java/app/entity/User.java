@@ -1,27 +1,56 @@
 package app.entity;
 
 
+import app.validation.Password;
+import app.validation.PasswordMatches;
+import app.validation.UniqueEmail;
+import app.validation.UniqueUsername;
+import org.springframework.context.annotation.EnableMBeanExport;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@PasswordMatches(message = "Password doesn't match")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
+    @UniqueUsername
     private String username;
 
+    @Email
+    @UniqueEmail
+    private String email;
+
+    @Password
     private String password;
 
     @Transient
     private String passwordConfirm;
 
     @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
+
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinTable(
+            name = "users_english_words",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "eng_words_id"))
+    private Set<EnglishWord> englishWords;
 
     public String getName() {
         return name;
@@ -69,5 +98,32 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<EnglishWord> getEnglishWords() {
+        return englishWords;
+    }
+
+    public void setEnglishWords(Set<EnglishWord> englishWords) {
+        this.englishWords = englishWords;
+    }
+
+    public void addGroup(EnglishWord englishWord) {
+        this.englishWords.add(englishWord);
+        englishWord.getUsers().add(this);
+    }
+
+
+    public void removeGroup(EnglishWord englishWord) {
+        this.englishWords.remove(englishWord);
+        englishWord.getUsers().remove(this);
     }
 }

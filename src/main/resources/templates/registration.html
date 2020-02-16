@@ -2,33 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .input-group {
+            padding: 10px;
+        }
+
+        .main {
+            width: 800px;
+            height: 200px;
+            margin:0 auto;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-<h1>Register Page</h1>
 <!--<p th:if="${loginError}" class="error">Wrong user or password</p>-->
-<form th:action="@{/user/registration}" method="post" th:object="${userForm}">
-
+<div class="container">
+    <div class="main"></div>
     <h2>Create your account</h2>
-    <div>
-    <div>
-        <label>Name</label>
-        <input th:field="*{name}">
-    </div>
-    <div>
-        <label>Username</label>
-        <input th:field="*{username}">
-    </div>
-    <div>
-        <label>Password</label>
-        <input th:field="*{password}">
-    </div>
-    <div>
-        <label>Confirm Password</label>
-        <input th:field="*{passwordConfirm}">
-    </div>
+    <form th:action="@{/user/registration}" method="post" th:object="${userForm}">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i></span>
+                <input class="form-control" placeholder="Name" th:field="*{name}">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+        <span class="input-group-text">
+        <span class="fa fa-user"></span>
+     </span>
+                <input class="form-control" placeholder="Username" th:field="*{username}">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                <input class="form-control" placeholder="Email" th:field="*{email}">
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                <input class="form-control" placeholder="Password" th:field="*{password}">
+            </div>
+        </div>
+        <small class="form-text text-muted">
+            Your password must be 8-20 characters long, contain letters, numbers and special characters, but must not contain spaces.
+        </small>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                <input class="form-control" placeholder="Password Confirm" th:field="*{passwordConfirm}">
+            </div>
+        </div>
         <button type="submit" class="btn btn-success">Register</button>
         <span>Already registered? <a href="/" th:href="@{/user/login}">Login here</a></span>
-    </div>
-</form>
+        <div style="color: red;" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </form>
+</div>
+</div>
 </body>
 </html>

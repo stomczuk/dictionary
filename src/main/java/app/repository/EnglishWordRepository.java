@@ -9,4 +9,6 @@ import java.util.List;
 
 
 public interface EnglishWordRepository extends JpaRepository <EnglishWord, Long> {
+
+    List<EnglishWord> findByUsers(User user);
 }

@@ -3,9 +3,18 @@ package app.controller;
 
 import app.entity.EnglishWord;
 import app.entity.Translation;
+import app.entity.User;
 import app.repository.EnglishWordRepository;
 import app.repository.TranslationRepository;
+import app.service.EnglishWordService;
+import app.service.SecurityService;
+import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,13 +32,21 @@ public class EnglishWordController {
     EnglishWordRepository englishWordRepository;
     @Autowired
     TranslationRepository translationRepository;
+    @Autowired
+    EnglishWordService englishWordService;
+    @Autowired
+    SecurityService securityService;
+    @Autowired
+    UserService userService;
 
     Logger logger = Logger.getGlobal();
 
     @GetMapping("/add")
     public String add(Model model) {
+
         EnglishWord englishWord = new EnglishWord();
         model.addAttribute("engWord", englishWord);
+        model.addAttribute("currentUsername", securityService.findLoggedInUsername());
         return "addEnglishWord";
     }
 
@@ -38,7 +55,9 @@ public class EnglishWordController {
         if (bindingResult.hasErrors()) {
             return "addEnglishWord";
         } else {
-            englishWordRepository.save(englishWord);
+            User user = userService.findByUsername(securityService.findLoggedInUsername());
+            user.addGroup(englishWord);
+            englishWordService.save(englishWord);
         }
 
         return "redirect:/englishWord/add";
@@ -48,7 +67,10 @@ public class EnglishWordController {
     public String delete(@PathVariable Long id) {
         if (id != null) {
             try {
-                englishWordRepository.deleteById(id);
+                User user = userService.findByUsername(securityService.findLoggedInUsername());
+                EnglishWord englishWord = englishWordService.getEnglishWordById(id);
+                user.removeGroup(englishWord);
+                englishWordService.save(englishWord);
             } catch (Exception e) {
                logger.info(e.getMessage());
             }
@@ -69,18 +91,16 @@ public class EnglishWordController {
         return "editEnglishWord";
     }
 
-    @PostMapping("/edit")
-    @ResponseBody
-    public String edit(@ModelAttribute("englishWord") EnglishWord englishWord) {
-
-            englishWordRepository.save(englishWord);
-
-        return "succcess";
+    @PostMapping("/edit/{id}")
+    public String edit(@ModelAttribute("englishWord") EnglishWord englishWord, @PathVariable Long id) {
+            englishWordService.updateEnglishWordById(id, englishWord);
+            return "redirect:/englishWord/add";
     }
 
     @ModelAttribute("listOfEnglishWords")
     public List<EnglishWord> listOfWords() {
-        List<EnglishWord> words = englishWordRepository.findAll();
-        return words;
+        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        return englishWordRepository.findByUsers(user);
+
     }
 }

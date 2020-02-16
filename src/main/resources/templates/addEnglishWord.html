@@ -12,6 +12,11 @@
             top: 10px;
             right: 10px;
         }
+        .currentUsername {
+            position: absolute;
+            top: 5px;
+            right: 90px;
+        }
     </style>
 </head>
 <body>
@@ -79,9 +84,14 @@
 </div>
 
 <br><br><br><br>
-<form th:action="@{/appLogout}" method="POST">
+<form th:action="@{/logout}" method="POST">
     <input class="logout_buttom" type="submit" value="Logout"/>
 </form>
+
+<br>
+<br>
+
+<p class= "currentUsername" label="Hello" th:text="${currentUsername}"/>
 
 </body>
 </html>
