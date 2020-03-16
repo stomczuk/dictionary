@@ -41,4 +41,9 @@ public class EnglishWordServiceImpl implements EnglishWordService {
 
         englishWordService.save(newEnglishWord);
     }
+
+    @Override
+    public List<EnglishWord>findAllEnglishWordsByUser(User user) {
+        return englishWordRepository.findAllByUsers(user);
+    }
 }

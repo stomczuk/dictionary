@@ -3,7 +3,6 @@ package app.validation;
 import app.entity.User;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

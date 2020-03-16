@@ -1,6 +1,5 @@
 package app.service;
 
-import app.entity.EnglishWord;
 import app.entity.Role;
 import app.entity.User;
 
@@ -15,6 +14,8 @@ public interface UserService {
     Set<Role> setUserRole();
 
     User findByEmail(String email);
+
+
 
 
 }

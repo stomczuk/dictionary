@@ -17,13 +17,29 @@
             height: 200px;
             margin:0 auto;
             display: inline-block;
+
+        }
+        .alert-danger {
+            font-size: 10px;
+        }
+        .container {
+            text-align: center;
+        }
+        .form {
+            display: inline-block;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-<!--<p th:if="${loginError}" class="error">Wrong user or password</p>-->
 <div class="container">
-    <div class="main"></div>
+<div class="form">
     <h2>Create your account</h2>
     <form th:action="@{/user/registration}" method="post" th:object="${userForm}">
         <div class="input-group">
@@ -63,9 +79,9 @@
         </div>
         <button type="submit" class="btn btn-success">Register</button>
         <span>Already registered? <a href="/" th:href="@{/user/login}">Login here</a></span>
-        <div style="color: red;" th:if="${#fields.hasErrors('*')}">
+        <div style="padding: 10px" th:if="${#fields.hasErrors('*')}">
             <ul>
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                <li class="alert alert-danger" th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
             </ul>
         </div>
     </form>

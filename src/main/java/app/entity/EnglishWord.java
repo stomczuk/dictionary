@@ -2,10 +2,6 @@ package app.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlInlineBinaryData;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,13 +13,11 @@ public class EnglishWord {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @Size(min = 2, message = "Required minimum 2 characters in English Word")
     private String word;
 
     private String pronunciation;
 
-//    @Size(min = 2, message = "Required minimum 2 characters in Translation")
-//    @NotNull
+
     private String translation;
 
     @ManyToMany(mappedBy = "englishWords")
@@ -42,7 +36,9 @@ public class EnglishWord {
         return id;
     }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getWord() {
         return word;

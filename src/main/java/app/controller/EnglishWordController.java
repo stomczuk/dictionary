@@ -2,19 +2,11 @@ package app.controller;
 
 
 import app.entity.EnglishWord;
-import app.entity.Translation;
 import app.entity.User;
-import app.repository.EnglishWordRepository;
-import app.repository.TranslationRepository;
 import app.service.EnglishWordService;
 import app.service.SecurityService;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,10 +20,6 @@ import java.util.logging.Logger;
 @RequestMapping("/englishWord")
 public class EnglishWordController {
 
-    @Autowired
-    EnglishWordRepository englishWordRepository;
-    @Autowired
-    TranslationRepository translationRepository;
     @Autowired
     EnglishWordService englishWordService;
     @Autowired
@@ -82,7 +70,7 @@ public class EnglishWordController {
     public String edit(@PathVariable Long id, Model model) {
         if (id != null) {
             try {
-               EnglishWord englishWord = englishWordRepository.getOne(id);
+               EnglishWord englishWord = englishWordService.getEnglishWordById(id);
                 model.addAttribute("englishWord", englishWord);
             } catch (Exception e) {
                 logger.info(e.getMessage());
@@ -100,7 +88,7 @@ public class EnglishWordController {
     @ModelAttribute("listOfEnglishWords")
     public List<EnglishWord> listOfWords() {
         User user = userService.findByUsername(securityService.findLoggedInUsername());
-        return englishWordRepository.findByUsers(user);
+        return englishWordService.findAllEnglishWordsByUser(user);
 
     }
 }

@@ -5,12 +5,11 @@ import app.validation.Password;
 import app.validation.PasswordMatches;
 import app.validation.UniqueEmail;
 import app.validation.UniqueUsername;
-import org.springframework.context.annotation.EnableMBeanExport;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,10 +20,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Username cannot be blank")
     @UniqueUsername
     private String username;
 
@@ -45,7 +44,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "users_english_words",
             joinColumns = @JoinColumn(name = "users_id"),
@@ -121,9 +120,10 @@ public class User {
         englishWord.getUsers().add(this);
     }
 
-
     public void removeGroup(EnglishWord englishWord) {
         this.englishWords.remove(englishWord);
         englishWord.getUsers().remove(this);
+        List test = new ArrayList<>();
+
     }
 }

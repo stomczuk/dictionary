@@ -1,7 +1,5 @@
 package app.entity;
 
-import sun.swing.plaf.GTKKeybindings;
-
 import javax.persistence.*;
 import java.util.Set;
 

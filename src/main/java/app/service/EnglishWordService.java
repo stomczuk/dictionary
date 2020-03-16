@@ -9,9 +9,10 @@ public interface EnglishWordService {
 
     void save(EnglishWord englishWord);
 
-//    List<EnglishWord> findAllByUsers (User user);
-
     EnglishWord getEnglishWordById(Long id);
 
-    public void updateEnglishWordById (Long id, EnglishWord englishWord);
+    void updateEnglishWordById(Long id, EnglishWord englishWord);
+
+    List<EnglishWord>findAllEnglishWordsByUser(User user);
+
 }
