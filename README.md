@@ -1,8 +1,7 @@
 # Description
-This app will help you to learn new words in foreign languages.
-The main feature of that app is that you have the possibility to add a new word that you want to learn by heart and have access to that whenever you want to.
-It is a kind of dictionary but only with words which you put inside. In order to check your memory, the app will create a test.
-The randomly chosen word will display on the screen and your task will be to translate it. 
+This is an app that helps you to learn vocabulary in a foreign language. 
+You are allowed to quickly add new words and have access to them anytime you want.
+Dictionary app also provides you with a test to checks your knowledge by simply replacing a word in the foreign language with the corresponding word in your native language.
 # Stack
 ### language 
 ```
