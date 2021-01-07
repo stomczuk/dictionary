@@ -1,12 +1,11 @@
 package app.repository;
 
 import app.entity.EnglishWord;
-import app.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface EnglishWordRepository extends JpaRepository<EnglishWord, Long> {
 
-public interface EnglishWordRepository extends JpaRepository <EnglishWord, Long> {
-
-    List<EnglishWord> findAllByUsers(User user);
+//    List<EnglishWord> findAllByUsers(User user);
 }

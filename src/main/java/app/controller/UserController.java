@@ -1,54 +1,37 @@
 package app.controller;
 
 import app.entity.User;
-import app.service.SecurityService;
+import app.exception.domain.ExceptionHandling;
 import app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import javax.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends ExceptionHandling {
 
-    @Autowired
-    UserService userService;
-    @Autowired
-    SecurityService securityService;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
 
-
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("userForm", new User());
-        return "registration";
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/registration")
-    public String register (@Valid @ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "registration";
+    @GetMapping("/home")
+    public String showSomething() {
+        return "application works";
+    }
+
+    @PostMapping("sign-up")
+    public ResponseEntity sighUp(@RequestBody User user) {
+        if (user != null) {
+            try {
+                userService.save(user);
+            } catch (Exception e) {
+                return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
         }
-        userService.save(userForm);
-        return "redirect:/user/login";
+        return new ResponseEntity(user, HttpStatus.OK);
     }
-
-    @GetMapping("/login")
-    public String login() {return "loginPage";}
-
-    @PostMapping("/loginSuccess")
-    public String loginSuccess() {
-        return "redirect:/englishWord/add";
-    }
-
-
 
 }

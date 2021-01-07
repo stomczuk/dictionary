@@ -2,8 +2,6 @@ package app.entity;
 
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "eng_words")
@@ -15,20 +13,16 @@ public class EnglishWord {
 
     private String word;
 
-    private String pronunciation;
-
-
     private String translation;
 
-    @ManyToMany(mappedBy = "englishWords")
-    private Set<User> users = new HashSet<>();
+//    @ManyToMany(mappedBy = "englishWords")
+//    private Set<User> users = new HashSet<>();
 
     public EnglishWord() {
     }
 
-    public EnglishWord(String word, String pronunciation, String translation) {
+    public EnglishWord(String word, String translation) {
         this.word = word;
-        this.pronunciation = pronunciation;
         this.translation = translation;
     }
 
@@ -48,14 +42,6 @@ public class EnglishWord {
         this.word = word;
     }
 
-    public String getPronunciation() {
-        return pronunciation;
-    }
-
-    public void setPronunciation(String pronunciation) {
-        this.pronunciation = pronunciation;
-    }
-
     public String getTranslation() {
         return translation;
     }
@@ -64,11 +50,10 @@ public class EnglishWord {
         this.translation = translation;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }

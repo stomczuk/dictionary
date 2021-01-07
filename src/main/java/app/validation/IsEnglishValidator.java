@@ -1,7 +1,5 @@
 package app.validation;
 
-import app.entity.EnglishWord;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 

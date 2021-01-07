@@ -1,18 +1,28 @@
 package app.service;
 
+import app.DTO.EnglishWordDTO;
 import app.entity.EnglishWord;
-import app.entity.User;
 
 import java.util.List;
 
 public interface EnglishWordService {
 
-    void save(EnglishWord englishWord);
+    void saveListOfDTO(List<EnglishWordDTO> englishWordsDTO);
+
+    void saveDAO(EnglishWord englishWord);
 
     EnglishWord getEnglishWordById(Long id);
 
-    void updateEnglishWordById(Long id, EnglishWord englishWord);
+    //    List<EnglishWord>findAllEnglishWordsByUser(User user);
+    List<EnglishWordDTO> convertListOfWordsToDTO(List<EnglishWord> list);
 
-    List<EnglishWord>findAllEnglishWordsByUser(User user);
+    EnglishWord convertToDao(EnglishWordDTO englishWordDTO);
+
+    void deleteById(Long id);
+
+    List<EnglishWord> getAllWords();
+
+    EnglishWordDTO convertWordToDTO(EnglishWord englishWord);
+
 
 }

@@ -1,6 +1,7 @@
 package app.validation;
 
 import org.passay.*;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;

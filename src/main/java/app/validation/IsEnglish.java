@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = IsEnglishValidator.class)
-public @interface IsEnglish  {
+public @interface IsEnglish {
 
     String message() default "{ppk.validator.constraint.isEnglish.format}";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

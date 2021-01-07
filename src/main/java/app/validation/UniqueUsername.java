@@ -15,7 +15,7 @@ public @interface UniqueUsername {
 
     String message() default "{username exists}";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

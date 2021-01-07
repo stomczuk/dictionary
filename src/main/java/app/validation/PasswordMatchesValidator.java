@@ -5,13 +5,13 @@ import app.entity.User;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class PasswordMatchesValidator implements ConstraintValidator <PasswordMatches, Object> {
+public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         User user = (User) o;
         if (user != null) {
-           return user.getPassword().equals(user.getPasswordConfirm());
+            return user.getPassword().equals(user.getPasswordConfirm());
         }
         return false;
     }
