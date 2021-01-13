@@ -2,7 +2,6 @@ package app.exception.domain;
 
 import app.model.HttpResponse;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.MethodNotAllowedException;
 
 import javax.security.auth.login.AccountLockedException;
 import java.util.Date;

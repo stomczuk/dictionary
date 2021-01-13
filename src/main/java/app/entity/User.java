@@ -12,9 +12,10 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userId;
     //    @NotBlank(message = "Name cannot be blank")
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     //    @NotBlank(message = "Username cannot be blank")
 //    @UniqueUsername
@@ -36,7 +37,7 @@ public class User implements Serializable {
 
     private Date joinDate;
 
-    private String[] roles;
+    private String role;
 
     private String[] authorities;
     private boolean isActive;
@@ -46,10 +47,10 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String userId, String name, String username, String email, String password, String passwordConfirm, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String[] roles, String[] authorities, boolean isActive, boolean isNonLocked) {
+    public User(Long id, String firstName, String lastName, String username, String email, String password, String passwordConfirm, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean isActive, boolean isNonLocked) {
         this.id = id;
-        this.userId = userId;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -57,18 +58,10 @@ public class User implements Serializable {
         this.lastLoginDate = lastLoginDate;
         this.lastLoginDateDisplay = lastLoginDateDisplay;
         this.joinDate = joinDate;
-        this.roles = roles;
+        this.role = role;
         this.authorities = authorities;
         this.isActive = isActive;
         this.isNonLocked = isNonLocked;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public Long getId() {
@@ -77,14 +70,6 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUsername() {
@@ -143,12 +128,12 @@ public class User implements Serializable {
         this.joinDate = joinDate;
     }
 
-    public String[] getRoles() {
-        return roles;
+    public String getRoles() {
+        return role;
     }
 
-    public void setRoles(String[] roles) {
-        this.roles = roles;
+    public void setRoles(String roles) {
+        this.role = role;
     }
 
     public String[] getAuthorities() {
@@ -173,6 +158,30 @@ public class User implements Serializable {
 
     public void setNonLocked(boolean nonLocked) {
         isNonLocked = nonLocked;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /*do zrobienia jak bede robil userow*/
