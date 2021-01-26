@@ -43,11 +43,13 @@ public class User implements Serializable {
     private boolean isActive;
     private boolean isNonLocked;
 
+    private String profileImageUrl;
+
 
     public User() {
     }
 
-    public User(Long id, String firstName, String lastName, String username, String email, String password, String passwordConfirm, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean isActive, boolean isNonLocked) {
+    public User(Long id, String firstName, String lastName, String username, String email, String password, String passwordConfirm, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean isActive, boolean isNonLocked, String profileImageUrl) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,6 +64,7 @@ public class User implements Serializable {
         this.authorities = authorities;
         this.isActive = isActive;
         this.isNonLocked = isNonLocked;
+        this.profileImageUrl = profileImageUrl;
     }
 
     public Long getId() {
@@ -182,6 +185,14 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     /*do zrobienia jak bede robil userow*/

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class LoginAttemptService {
 
-    private static final int MAXIMUM_NUMBER_OF_ATTEMPT = 5;
+    private static final int MAXIMUM_NUMBER_OF_ATTEMPT = 2;
     private static final int ATTEMPT_INCREMENT = 1;
     private LoadingCache<String, Integer> loginAttemptCache;
 
@@ -30,13 +30,22 @@ public class LoginAttemptService {
         loginAttemptCache.invalidate(username);
     }
 
-    public void addUserToLoginAttemptCache(String username) throws ExecutionException {
+    public void addUserToLoginAttemptCache(String username) {
         int attempts = 0;
+        try {
             attempts = ATTEMPT_INCREMENT + loginAttemptCache.get(username);
-            loginAttemptCache.put(username, attempts);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        loginAttemptCache.put(username, attempts);
     }
 
-    public boolean hasExceededMaxAttempts(String username) throws ExecutionException {
-        return loginAttemptCache.get(username) >= MAXIMUM_NUMBER_OF_ATTEMPT;
+    public boolean hasExceededMaxAttempts(String username) {
+        try {
+            return loginAttemptCache.get(username) >= MAXIMUM_NUMBER_OF_ATTEMPT;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

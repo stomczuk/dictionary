@@ -6,8 +6,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ExecutionException;
-
 @Component
 public class AuthenticationFailureListener {
     private LoginAttemptService loginAttemptService;
@@ -18,7 +16,7 @@ public class AuthenticationFailureListener {
     }
 
     @EventListener
-    public void onAuthFailure(AuthenticationFailureBadCredentialsEvent event) throws ExecutionException {
+    public void onAuthFailure(AuthenticationFailureBadCredentialsEvent event) {
          Object principal = event.getAuthentication().getPrincipal();
          if (principal instanceof String) {
              String username = (String) event.getAuthentication().getPrincipal();

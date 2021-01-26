@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,9 +40,9 @@ public class ExceptionHandling {
        return createHttpResponse(HttpStatus.BAD_REQUEST, ACCOUNT_DISABLED);
     }
 
-    @ExceptionHandler(AccountLockedException.class)
+    @ExceptionHandler(LockedException.class)
     public ResponseEntity<HttpResponse> accountLockedException() {
-        return createHttpResponse(HttpStatus.BAD_REQUEST, ACCOUNT_LOCKED);
+        return createHttpResponse(HttpStatus.FORBIDDEN, ACCOUNT_LOCKED);
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)

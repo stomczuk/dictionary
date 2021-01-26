@@ -1,4 +1,4 @@
-package app.security;
+package app.constant;
 
 public class SecurityConstant {
 
