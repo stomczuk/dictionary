@@ -1,6 +1,7 @@
 
 .idea
 .imi
-application.properties
+**\src\main\resources\application.properties
 .json
 .yml
+**/EmailConstant.java
