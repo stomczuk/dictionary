@@ -1,6 +1,8 @@
 
 .idea
 .imi
-application.properties
+
 .json
 .yml
+application.properties
+EmailConstant.java
