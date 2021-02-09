@@ -1,5 +1,11 @@
 # Object file
 *.o
+*.idea
+*.imi
+*.json
+*.yml
+application.properties
+EmailConstant.java
 
 # Ada Library Information
 *.ali
