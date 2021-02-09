@@ -3,8 +3,8 @@ package app.constant;
 public class EmailConstant {
 
     public static final String SIMPLE_MAIL_TRANSFER_PROTOCOL = "smtps";
-    public static final String USERNAME = "sebastian.tomczuk5@gmail.com";
-    public static final String PASSWORD = "megamen1";
+    public static final String USERNAME = "test@gmail.com";
+    public static final String PASSWORD = "test";
     public static final String FROM_MAIL = "support@getarrays.com";
     public static final String CC_EMAIL = "sebatom1@o2.pl";
     public static final String EMAIL_SUBJECT = "Get Arrays, LLC - New Password";
